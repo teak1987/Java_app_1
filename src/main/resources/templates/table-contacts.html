@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>All Contacts</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" 
+integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+			<h1>All Contacts</h1>
+			<a href="/" type="button" class="btn btn-primary btn-md" style="margin-top: 10px; margin-bottom: 10px;">Go Back</a>
+            <a th:href="@{/all-contacts/export}" type="button" class="btn btn-info btn-md">Export to CSV</a>
+			<table id="example" class="table table-striped table-bordered text-center">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Address</th>
+						<th>Image</th>
+						<th>Created date</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+			<tbody th:with="count=0">
+					<tr th:each="addressBook, hh : ${contacts}">
+						<td th:with="count=${count + 1}" th:text="${count}"></td>
+						<td th:text="${addressBook.name}"></td>
+						<td><img th:src="@{${'/contact/display/'+ addressBook.id}}"
+							class="card img-fluid" style="width: 200px;height:100px;" alt="" /></td>
+						<td th:text="${addressBook.address}"></td>
+						<td th:text="${#dates.format({addressBook.createDate}, 'dd-MM-yyyy')}" /></td>
+					<td><a
+						th:href="@{/all-contacts/details(id=${addressBook.id})}"
+						class="btn btn-info text-right" target="_blank">View
+						</a> 
+						<a
+						th:href="@{/all-contacts/edit(id=${addressBook.id})}"
+						class="btn btn-primary text-right" target="_blank">Edit
+						</a>
+						 <a data-toggle="modal" data-target="#modal-warning" class="btn btn-danger"
+						th:attr="data-target='#modal-warning'+${addressBook.id }">Delete
+						</a>
+						<div class="modal modal-warning fade in"
+							th:id="modal-warning+${addressBook.id }" style="margin-top:17%;">
+							<div class="modal-dialog">
+								<div class="modal-content" style="background:red;">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">×</span>
+										</button>
+										<h5 class="modal-title" style="font-size:18px;font-weight:bold;">Delete User</h5>
+									</div>
+									<div class="modal-body">
+										<h3>Are you sure want to delete this contact?</h3>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-outline pull-left"
+											data-dismiss="modal">Close</button>
+										<a type="button" class="btn btn-primary"
+											th:href="@{/all-contacts/delete/{id}(id=${addressBook.id})}"><i
+											class="fa fa-check"></i>&nbsp;Yes</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
+
+			<script
+				src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			<script
+				src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+			<script
+				src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+	    <script src="/js/delete-contact.js"></script>
+
+
+	</div>
+</body>
+</html>

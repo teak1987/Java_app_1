@@ -1,0 +1,43 @@
+body{
+	margin:0px;
+	padding:20px;
+}
+#background-image{
+	width:1280px;
+	height:800px;
+	margin:auto;
+
+}
+
+#back-image{
+	 background-image: url("/images/address-book-small.png"); 
+     background-position: center; /* Center the image */ 
+     background-repeat: no-repeat; /* Do not repeat the image */ 
+	 margin:auto;
+	 width:640px;
+	 height:400px;
+}
+
+#bk{
+	font-size:66px;
+	text-align:center;
+	margin-top:30px;
+	font-family:Arial;
+	padding-top:130px;
+	
+}
+
+
+#b1{
+	margin-left:25%;
+	margin-top:70px;
+}
+
+#b2{
+	margin-left:20%;
+	margin-top:70px;
+}
+
+#cre{
+	padding:10%
+}
