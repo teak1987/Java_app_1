@@ -1,19 +1,12 @@
 $(document).ready(function() {
 	$("#submitEdit").on("click", function() {
-		alert("Hellooo");
+	/*	alert("Hellooo");*/
 		var id = $("#id").val();
     	var name = $("#name").val();
 	    var address = $("#address").val();
         var file = $("#image").val(); 
         var form = $("#form").serialize();
         var data = new FormData($("#form")[0]);	 
-    
-   /*   alert(data);
-        alert(id);
-		alert(name);
-		alert(address);*/
-	
-		
 		data.append('id',id);
 		data.append('name', name);
 		data.append('address', address);
@@ -30,10 +23,9 @@ $(document).ready(function() {
 				console.log(xhr.status);
 				if (xhr.status == "200") {
 					location.reload();
-				/*	$("#form")[0].reset();*/
 					$('#success').css('display', 'block');
 					$("#success").html("Contact Edited Succsessfully.");
-					$('#success').delay(3000).fadeOut('slow');
+					$('#success').delay(5000).fadeOut('slow');
 				
 				}
 			},
