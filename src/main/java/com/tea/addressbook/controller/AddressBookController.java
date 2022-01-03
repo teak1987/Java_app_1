@@ -199,15 +199,15 @@ public class AddressBookController {
 	public @ResponseBody ResponseEntity<?> editContact(@RequestParam("id") Long id,
 			@RequestParam("name") String name,
 			 @RequestParam("address") String address, Model model, HttpServletRequest request
-			,final @RequestParam("image") MultipartFile file,
-			Optional<AddressBook> addressBook) {
+			,@RequestParam(value="image", required = false) MultipartFile file) {
 		String[] names = name.split(",");
 		String[] addresses = address.split(",");
+		AddressBook addressBook;
 		try {
 			//If no new image uploaded
 			if(file.getSize() == 0) {
 				//Get contact from database with this id
-				addressBook = addressBookService.getContactById(id);
+				addressBook = addressBookService.getContactById(id).get();
 //				AddressBook addressBook = new AddressBook();
 				addressBook.setName(names[0]);
 				addressBook.setAddress(addresses[0]);
@@ -237,7 +237,7 @@ public class AddressBookController {
 					e.printStackTrace();
 				}
 				byte[] imageData = file.getBytes();
-				 addressBook = addressBookService.getContactById(id);
+				 addressBook = addressBookService.getContactById(id).get();
 			
 //				AddressBook addressBook = new AddressBook();
 				addressBook.setName(names[0]);

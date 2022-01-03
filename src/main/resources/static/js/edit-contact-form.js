@@ -29,10 +29,12 @@ $(document).ready(function() {
 			success: function(data, statusText, xhr) {
 				console.log(xhr.status);
 				if (xhr.status == "200") {
-					$("#form")[0].reset();
+					location.reload();
+				/*	$("#form")[0].reset();*/
 					$('#success').css('display', 'block');
 					$("#success").html("Contact Edited Succsessfully.");
 					$('#success').delay(3000).fadeOut('slow');
+				
 				}
 			},
 			error: function(e) {
